@@ -27,10 +27,16 @@ app.post('/api/notes', (req, res) => {
   notes.push(req.body);
   const newNote = JSON.stringify(notes, null, 2);
   fs.writeFileSync('./db/db.json', newNote);
-  res.json(notes);
+  res.json(req.body);
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+  const data = fs.readFileSync('./db/db.json', 'utf-8');
+  const notes = JSON.parse(data);
 
+  const newNote = JSON.stringify(notes, null, 2);
+  fs.writeFileSync('./db/db.json', newNote);
+});
 
 
 
